@@ -1,0 +1,19 @@
+{
+  "name": "slayout",
+  "version": "0.0.0",
+  "description": "slayout\r =======",
+  "main": "slayout.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rasmusfl0e/slayout.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rasmusfl0e/slayout/issues"
+  },
+  "homepage": "https://github.com/rasmusfl0e/slayout"
+}
