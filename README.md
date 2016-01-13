@@ -1,48 +1,76 @@
 ![Slayout](https://github.com/rasmusfl0e/slayout/blob/master/img/logo.png)
 
+Slayout
+=======
+
 > Custom property syntax to enable semantic layout in CSS.
 
-Slayout is a custom property with a shorthand notation to easily describe responsive row/column layouts.
-
-This repository describes the custom property and contains an algoritm to calculate the layouts.
+This repository describes the custom property and contains an algorithm to interpret it.
 Actual usable code is provided as [plugins](#plugins).
+
+## Synopsis
+
+Using utility classes to control layouts adds cruft to the HTML and can be quite difficult to decode once written. 
+
+Instead Slayout uses a custom property (`slayout`) with a shorthand notation to easily describe responsive row/column layouts.  
+
+The custom property is added to a container element to control the layout of its child elements.
+This keeps layout handling in your stylesheets - where it belongs - and keeps layout data in one place.
+
+### Features
+
+* Semantic - avoid the myriad of classes in your HTML - keeps your styling in your CSS.
+* Minimal syntax - easy to write, easy to read.
+* Flexible - use the any number of sub-columns you want for your grid - per media query even.
 
 ## Syntax
 
-```
+```css
 /* A single row with one full width block and 2 half width underneath. */
 slayout: 12 / 12 6 6;
 
 /* Same as above with an added media query where layout changes. */
 slayout: 12 / 12 6 6,
          (min-width: 640px) 12 / 6 3 3;
-``` 
+
+/* Use different sub-column count per media query if you want. */
+slayout: 4 / 4 2 2,
+         (min-width: 640px) 12 / 6 3 3;
+         
+/* The last block width is repeated which means it can be shortened to this: */
+slayout: 4 / 4 2,
+         (min-width: 640px) 12 / 6 3;
+```
 
 ### Values
 
 * **`<media-query>`** - describes the media query a set of values should be active for. Optional for the first set of values.  
-* **`<columns>`** - an integer describing the width of your layout.
-* **`<blocks>`** - a set of integers describing the width each block in your layout.
-
+* **`<sub-columns>`** - an number describing how many sub-columns you want to divide your layout into.
+* **`<blocks>`** - a set of numbers describing how many sub-columns each block spans in your layout. The last 
 
 ### Formal syntax
 
 ```
-	[ <layout-values>, ]* <layout-values>
-	
-	where
-	<layout-values> = [<media-query>] <columns> / <blocks>
-	
-	where
-	<columns> = <integer>
-	
-	where
-	<blocks> = [ <integer> ]* <integer>
+<initial-layout-values> [ , <layout-values> ]*
+
+where
+<initial-layout-values> = <media-query>? <sub-columns> / <blocks>
+
+where
+<layout-values> = <media-query> <sub-columns> / <blocks>
+
+where
+<sub-columns> = <number>
+
+where
+<blocks> = <number>+
 ```
+
+The above uses the [value definition syntax](https://developer.mozilla.org/en-US/docs/Web/CSS/Value_definition_syntax) from MDN.
 
 Writing:
 
-```
+```css
 .test {
 	slayout: 12 / 12 6 6,
 		(min-width: 640px) 12 / 6 3 3;
@@ -51,7 +79,7 @@ Writing:
 
 ...should translate into:
 
-```
+```css
 .test {
 	margin-left: -10px;
 	margin-right: -10px;
