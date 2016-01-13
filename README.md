@@ -45,7 +45,7 @@ slayout: 4 / 4 2,
 ### Values
 
 * **`<media-query>`** - describes the media query a set of values should be active for. Optional for the first set of values.  
-* **`<sub-columns>`** - an number describing how many sub-columns you want to divide your layout into.
+* **`<sub-columns>`** - a number describing how many sub-columns you want to divide your layout into.
 * **`<blocks>`** - a set of numbers describing how many sub-columns each block spans in your layout. The last 
 
 ### Formal syntax
